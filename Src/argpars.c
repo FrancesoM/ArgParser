@@ -17,7 +17,7 @@
 #define FLAG3 'f'
 #define VAL1 'g'
 #define VAL2 'h'
-#define MAXPARAM 6
+#define MAXPARAM 8
 #define MAXSTRLEN 20
 
 typedef struct{
@@ -55,13 +55,13 @@ void setFlag(char flag, optStruct* options)
 	switch(flag)
 	{
 		case FLAG1:
-			options->e = 1;
+			options->d = 1;
 			break;
 		case FLAG2:
-			options->f = 1;
+			options->e = 1;
 			break;
 		case FLAG3:
-			options->g = 1;
+			options->f = 1;
 			break;
 	}
 }
@@ -109,23 +109,34 @@ void initOpt(optStruct* options)
 
 void printOpt(optStruct* options)
 {
-	printf("%s \n   \
-		    %s \n    \  
-		    %s \n    \
-		    %d \n    \
-		    %d \n    \
-		    %d \n    \
-		    %d \n    \
-		    %d \n    \
-		    %d \n",
-		    options->a,
-		    options->b,
-		    options->c,
-		    options->d,
-		    options->e,
-		    options->f,
-		    options->g,
-		    options->h );
+	char* c;
+	c = options->a;
+	for(int i = 0; i < MAXSTRLEN; i++)
+	{
+		printf("%c",*(c+i));
+	}
+	printf("\n");
+
+	c = options->b;
+	for(int i = 0; i < MAXSTRLEN; i++)
+	{
+		printf("%c",*(c+i));
+	}
+	printf("\n");
+	
+	c = options->c;
+	for(int i = 0; i < MAXSTRLEN; i++)
+	{
+		printf("%c",*(c+i));
+	}
+	printf("\n");
+
+	printf("%d \n%d \n%d \n%d \n%d \n",
+	    options->d,
+	    options->e,
+	    options->f,
+	    options->g,
+	    options->h );
 }
 
 /* GENERAL FUNCTIONS */
@@ -186,7 +197,7 @@ void fillOptStruct(char** argv, int* optIndex, int nOpt, optStruct* options)
 			case 3: /*Numerical parameter*/
 				//If at argv[i]+1 there is h, at argv[i+1] there is the string representing the number
 				currentOpt = *(argv[optIndex[i]]+1);
-				numPar = atoi(   (argv[optIndex[i]]+1)   );
+				numPar = atoi(   argv[optIndex[i]+1]   );
 				setNumPar(currentOpt, options, numPar);
 				break;
 			case -1: /* Error */
