@@ -154,7 +154,7 @@ void fillOptStruct(char** argv, int* optIndex, int nOpt, optStruct* options)
 		switch( parseOption(*(argv[optIndex[i]]+1)) )
 		{
 			case 1: /* Flag */
-				//Check if -f or -fg or -efg ecc..
+				//Check if -f or -fd or -efd ecc..
 				int j=0;
 				//This works because +1 excludes the "-" and the j cycles on the other flags, if more than one
 				currentOpt = *(argv[optIndex[i]]+1+j);
@@ -208,6 +208,6 @@ int main(int argc, char** argv)
 	fillOptStruct(argv, optIndex, nOpt, &options);
 
 	printOpt(&options);
-
+	return 0;
 
 }
